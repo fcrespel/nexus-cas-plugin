@@ -16,6 +16,7 @@
 	</repositories>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.version>2.5.0-04</nexus.version>
 		<app-lifecycle.version>1.7</app-lifecycle.version>
 		<shiro.version>1.2.1</shiro.version>
