@@ -1,0 +1,63 @@
+<model xml.namespace="${version}"
+	xml.schemaLocation="${version}"
+	xsd.namespace="${version}"
+    xsd.targetNamespace="${version}">
+
+    <id>cas</id>
+
+    <name>CasPluginConfiguration</name>
+
+    <description>
+        <![CDATA[
+        <p>Nexus CAS Plugin Configuration.</p>
+        ]]>
+    </description>
+
+    <defaults>
+        <default>
+            <key>package</key>
+            <value>org.sonatype.nexus.plugins.cas.config.model</value>
+        </default>
+    </defaults>
+
+    <classes>
+        <class rootElement="true" xml.tagName="casConfiguration">
+            <name>Configuration</name>
+            <description>The root element of Nexus CAS Plugin configuration.</description>
+            <fields>
+                <field>
+                    <name>casServerUrl</name>
+                    <description>CAS server URL (e.g. https://example.org/cas)</description>
+                    <type>String</type>
+                    <required>true</required>
+                </field>
+                <field>
+                	<name>casRestTicketUrl</name>
+                	<description>CAS REST ticket API URL (e.g. https://example.org/cas/api/rest/tickets/)</description>
+                	<type>String</type>
+                	<required>true</required>
+                </field>
+                <field>
+                    <name>casService</name>
+                    <description>CAS service URL (e.g. http://example.org/nexus)</description>
+                    <type>String</type>
+                    <required>true</required>
+                </field>
+                <field>
+                	<name>validationProtocol</name>
+                	<description>CAS ticket validation protocol ('CAS' or 'SAML')</description>
+                	<type>String</type>
+                	<required>false</required>
+                	<defaultValue>SAML</defaultValue>
+                </field>
+                <field>
+                    <name>roleAttributeNames</name>
+                    <description>Comma-separated list of role attribute names</description>
+                    <type>String</type>
+                    <required>false</required>
+                    <defaultValue>groups,roles</defaultValue>
+                </field>
+            </fields>
+        </class>
+    </classes>
+</model>
