@@ -57,6 +57,20 @@
                     <required>false</required>
                     <defaultValue>groups,roles</defaultValue>
                 </field>
+                <field>
+                    <name>connectTimeout</name>
+                    <description>CAS REST client connect timeout (in milliseconds)</description>
+                    <type>int</type>
+                    <required>false</required>
+                    <defaultValue>5000</defaultValue>
+                </field>
+                <field>
+                    <name>readTimeout</name>
+                    <description>CAS REST client read timeout (in milliseconds)</description>
+                    <type>int</type>
+                    <required>false</required>
+                    <defaultValue>5000</defaultValue>
+                </field>
             </fields>
         </class>
     </classes>

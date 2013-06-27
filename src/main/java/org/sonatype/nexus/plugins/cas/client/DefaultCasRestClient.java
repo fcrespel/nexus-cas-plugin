@@ -6,6 +6,10 @@ import org.codehaus.plexus.component.annotations.Component;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.jasig.cas.client.validation.TicketValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
@@ -18,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 @Component(role = CasRestClient.class, hint = "default")
 public class DefaultCasRestClient implements CasRestClient {
 
+	private static final Logger log = LoggerFactory.getLogger(DefaultCasRestClient.class);
+	
 	private RestTemplate restTemplate;
 	private String casRestTicketUrl;
 	private TicketValidator ticketValidator;
@@ -33,6 +39,26 @@ public class DefaultCasRestClient implements CasRestClient {
 	@Override
 	public void setRestTemplate(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
+	}
+	
+	@Override
+	public void setConnectTimeout(int connectTimeout) {
+		ClientHttpRequestFactory requestFactory = getRestTemplate().getRequestFactory();
+		if (requestFactory instanceof SimpleClientHttpRequestFactory) {
+			((SimpleClientHttpRequestFactory)requestFactory).setConnectTimeout(connectTimeout);
+		} else {
+			log.warn("RestTemplate ClientHttpRequestFactory implementation class '" + requestFactory.getClass().getName() + "' is not supported");
+		}
+	}
+
+	@Override
+	public void setReadTimeout(int readTimeout) {
+		ClientHttpRequestFactory requestFactory = getRestTemplate().getRequestFactory();
+		if (requestFactory instanceof SimpleClientHttpRequestFactory) {
+			((SimpleClientHttpRequestFactory)requestFactory).setReadTimeout(readTimeout);
+		} else {
+			log.warn("RestTemplate ClientHttpRequestFactory implementation class '" + requestFactory.getClass().getName() + "' is not supported");
+		}
 	}
 
 	@Override

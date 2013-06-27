@@ -62,6 +62,8 @@ public class CasAuthenticatingRealm extends CasRealm implements Initializable {
 			setRoleAttributeNames(config.getRoleAttributeNames());
 			casRestClient.setCasRestTicketUrl(config.getCasRestTicketUrl());
 			casRestClient.setTicketValidator(ensureTicketValidator());
+			casRestClient.setConnectTimeout(config.getConnectTimeout());
+			casRestClient.setReadTimeout(config.getReadTimeout());
 			log.info("CAS plugin configured for use with server " + config.getCasServerUrl());
 			isConfigured = true;
 		}

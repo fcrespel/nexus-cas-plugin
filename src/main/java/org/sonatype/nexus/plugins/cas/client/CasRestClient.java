@@ -16,6 +16,9 @@ public interface CasRestClient {
 
 	public RestTemplate getRestTemplate();
 	public void setRestTemplate(RestTemplate restTemplate);
+	
+	public void setConnectTimeout(int connectTimeout);
+	public void setReadTimeout(int readTimeout);
 
 	public String getCasRestTicketUrl();
 	public void setCasRestTicketUrl(String casRestTicketUrl);
