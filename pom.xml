@@ -8,13 +8,6 @@
 	<packaging>nexus-plugin</packaging>
 	<name>Nexus CAS Plugin</name>
 
-	<repositories>
-		<repository>
-			<id>sonatype-public-grid</id>
-			<url>http://repository.sonatype.org/content/groups/sonatype-public-grid/</url>
-		</repository>
-	</repositories>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<nexus.version>2.5.0-04</nexus.version>
@@ -22,6 +15,25 @@
 		<shiro.version>1.2.1</shiro.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 	</properties>
+
+	<repositories>
+		<repository>
+			<id>sonatype-public-grid</id>
+			<url>http://repository.sonatype.org/content/groups/sonatype-public-grid/</url>
+		</repository>
+	</repositories>
+	<scm>
+		<connection>scm:git:ssh://github.com/fcrespel/nexus-cas-plugin.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/fcrespel/nexus-cas-plugin.git</developerConnection>
+		<url>https://github.com/fcrespel/nexus-cas-plugin</url>
+	</scm>
+	<developers>
+		<developer>
+			<id>fcrespel</id>
+			<name>Fabien Crespel</name>
+			<email>fabien@crespel.net</email>
+		</developer>
+	</developers>
 
 	<dependencyManagement>
 		<dependencies>
