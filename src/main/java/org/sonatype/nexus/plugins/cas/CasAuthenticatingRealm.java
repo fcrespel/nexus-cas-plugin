@@ -8,6 +8,7 @@ import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.cas.CasRealm;
 import org.apache.shiro.realm.Realm;
@@ -47,6 +48,7 @@ public class CasAuthenticatingRealm extends CasRealm implements Initializable {
 	public CasAuthenticatingRealm() {
 		super();
 		setAuthenticationTokenClass(UsernamePasswordToken.class);
+		setCredentialsMatcher(new AllowAllCredentialsMatcher());
 	}
 
 	@Override
