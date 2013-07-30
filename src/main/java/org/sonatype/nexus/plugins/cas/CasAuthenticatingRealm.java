@@ -58,6 +58,11 @@ public class CasAuthenticatingRealm extends CasRealm implements Initializable {
 		setAuthenticationTokenClass(UsernamePasswordToken.class);
 		setCredentialsMatcher(new AllowAllCredentialsMatcher());
 	}
+	
+	@Override
+	public String getName() {
+		return ROLE;
+	}
 
 	@Override
 	public void initialize() throws InitializationException {
