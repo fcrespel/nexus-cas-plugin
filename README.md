@@ -49,22 +49,3 @@ The root `<casConfiguration>` element may contain the following children:
 * **roleAttributeNames** *(default "groups,roles")*: comma-separated list of role attribute names
 * **connectTimeout** *(default "5000")*: CAS REST client connect timeout (in milliseconds)
 * **readTimeout** *(default "5000")*: CAS REST client read timeout (in milliseconds)
-
-
-Changelog
----------
-
-**Version 1.0.0**
-* Initial release.
-
-**Version 1.0.1**
-* Fix for SAML 1.1 support.
-* Fix for IncorrectCredentialsException during authentication.
-* Support for attributes with multiple values.
-
-**Version 1.1.0**
-* Support for external user/group role mappings.
-
-**Version 1.2.0**
-* Compatibility with Nexus 1.7.x and higher.
-* Conversion of Plexus components to JSR-330.
