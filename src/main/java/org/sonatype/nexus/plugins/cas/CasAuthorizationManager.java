@@ -2,15 +2,21 @@ package org.sonatype.nexus.plugins.cas;
 
 import java.util.Set;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.sonatype.security.authorization.AbstractReadOnlyAuthorizationManager;
-import org.sonatype.security.authorization.AuthorizationManager;
 import org.sonatype.security.authorization.NoSuchPrivilegeException;
 import org.sonatype.security.authorization.NoSuchRoleException;
 import org.sonatype.security.authorization.Privilege;
 import org.sonatype.security.authorization.Role;
 
-@Component(role=AuthorizationManager.class, hint=CasAuthorizationManager.SOURCE_NAME)
+/**
+ * CAS Authorization Manager that accepts all roles.
+ * @author Fabien Crespel <fabien@crespel.net>
+ */
+@Singleton
+@Named(CasAuthorizationManager.SOURCE_NAME)
 public class CasAuthorizationManager extends AbstractReadOnlyAuthorizationManager {
 	
 	public static final String SOURCE_NAME = "CAS";

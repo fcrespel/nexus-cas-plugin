@@ -2,7 +2,9 @@ package org.sonatype.nexus.plugins.cas.client;
 
 import java.net.URI;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.jasig.cas.client.validation.TicketValidator;
@@ -19,7 +21,8 @@ import org.springframework.web.client.RestTemplate;
  * CAS REST API client implementation using Spring.
  * @author Fabien Crespel <fabien@crespel.net>
  */
-@Component(role = CasRestClient.class, hint = "default")
+@Singleton
+@Named
 public class DefaultCasRestClient implements CasRestClient {
 
 	private static final Logger log = LoggerFactory.getLogger(DefaultCasRestClient.class);

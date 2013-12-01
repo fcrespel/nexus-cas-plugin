@@ -3,16 +3,22 @@ package org.sonatype.nexus.plugins.cas;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.codehaus.plexus.component.annotations.Component;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.sonatype.security.usermanagement.AbstractReadOnlyUserManager;
 import org.sonatype.security.usermanagement.DefaultUser;
 import org.sonatype.security.usermanagement.User;
-import org.sonatype.security.usermanagement.UserManager;
 import org.sonatype.security.usermanagement.UserNotFoundException;
 import org.sonatype.security.usermanagement.UserSearchCriteria;
 import org.sonatype.security.usermanagement.UserStatus;
 
-@Component(role=UserManager.class, hint=CasUserManager.SOURCE_NAME)
+/**
+ * CAS User Manager that accepts all users.
+ * @author Fabien Crespel <fabien@crespel.net>
+ */
+@Singleton
+@Named(CasUserManager.SOURCE_NAME)
 public class CasUserManager extends AbstractReadOnlyUserManager {
 	
 	public static final String SOURCE_NAME = "CAS";

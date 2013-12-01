@@ -8,6 +8,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,43 +22,42 @@ import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cas.CasRealm;
-import org.apache.shiro.realm.Realm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.CollectionUtils;
-import org.codehaus.plexus.component.annotations.Component;
-import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.Initializable;
 import org.codehaus.plexus.personality.plexus.lifecycle.phase.InitializationException;
 import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.sonatype.inject.Description;
 import org.sonatype.nexus.plugins.cas.client.CasRestClient;
 import org.sonatype.nexus.plugins.cas.config.CasPluginConfiguration;
 import org.sonatype.nexus.plugins.cas.config.model.v1_0_0.Configuration;
 
 /**
  * CAS Authentication Realm using CAS REST API.
- * 
  * @author Fabien Crespel <fabien@crespel.net>
  */
-@Component(role = Realm.class, hint = CasAuthenticatingRealm.ROLE, description = "CAS Authentication Realm")
+@Singleton
+@Named(CasAuthenticatingRealm.ROLE)
+@Description("CAS Authentication Realm")
 public class CasAuthenticatingRealm extends CasRealm implements Initializable {
 
 	public static final String ROLE = "CasAuthenticatingRealm";
 	private static final Logger log = LoggerFactory.getLogger(CasAuthenticatingRealm.class);
 
-	@Requirement
-	private CasPluginConfiguration casPluginConfiguration;
-
-	@Requirement
-	private CasRestClient casRestClient;
+	private final CasPluginConfiguration casPluginConfiguration;
+	private final CasRestClient casRestClient;
 
 	private boolean isConfigured = false;
 
-	public CasAuthenticatingRealm() {
+	@Inject
+	public CasAuthenticatingRealm(final CasPluginConfiguration casPluginConfiguration, final CasRestClient casRestClient) {
 		super();
+		this.casPluginConfiguration = casPluginConfiguration;
+		this.casRestClient = casRestClient;
 		setAuthenticationTokenClass(UsernamePasswordToken.class);
 		setCredentialsMatcher(new AllowAllCredentialsMatcher());
 	}
@@ -101,7 +104,7 @@ public class CasAuthenticatingRealm extends CasRealm implements Initializable {
 			return createAuthenticationInfo(st, assertion);
 
 		} catch (TicketValidationException e) {
-			log.error("Error validating remote CAS REST Ticket for user '" + upToken.getUsername() + "'", e);
+			log.warn("Error validating remote CAS REST Ticket for user '" + upToken.getUsername() + "'", e);
 			throw new AuthenticationException(e);
 
 		} catch (Exception e) {
