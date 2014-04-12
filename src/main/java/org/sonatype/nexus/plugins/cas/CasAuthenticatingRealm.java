@@ -31,7 +31,7 @@ import org.jasig.cas.client.validation.Assertion;
 import org.jasig.cas.client.validation.TicketValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonatype.inject.Description;
+import org.eclipse.sisu.Description;
 import org.sonatype.nexus.plugins.cas.client.CasRestClient;
 import org.sonatype.nexus.plugins.cas.config.CasPluginConfiguration;
 import org.sonatype.nexus.plugins.cas.config.model.v1_0_0.Configuration;
