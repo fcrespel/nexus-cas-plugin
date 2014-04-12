@@ -1,17 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sonatype.nexus.plugins</groupId>
+	<parent>
+		<groupId>org.sonatype.nexus.plugins</groupId>
+		<artifactId>nexus-plugins</artifactId>
+		<version>2.8.0-05</version>
+	</parent>
+
 	<artifactId>nexus-cas-plugin</artifactId>
 	<version>1.2.1-SNAPSHOT</version>
 	<packaging>nexus-plugin</packaging>
 	<name>Nexus CAS Plugin</name>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<nexus.version>2.7.0-04</nexus.version>
-		<app-lifecycle.version>1.7</app-lifecycle.version>
-		<shiro.version>1.2.1</shiro.version>
+		<shiro.version>1.2.2</shiro.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
 	</properties>
 
@@ -48,19 +51,16 @@
 		<dependency>
 			<groupId>org.sonatype.nexus</groupId>
 			<artifactId>nexus-plugin-api</artifactId>
-			<version>${nexus.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
-			<version>${shiro.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-web</artifactId>
-			<version>${shiro.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -71,6 +71,10 @@
 				<exclusion>
 					<groupId>javax.servlet</groupId>
 					<artifactId>servlet-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -85,6 +89,12 @@
 			<artifactId>xmlsec</artifactId>
 			<version>1.5.5</version>
 			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -103,6 +113,10 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-asm</artifactId>
 				</exclusion>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 	</dependencies>
@@ -110,30 +124,12 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.sonatype.plugins</groupId>
-				<artifactId>app-lifecycle-maven-plugin</artifactId>
-				<version>${app-lifecycle.version}</version>
-				<extensions>true</extensions>
-				<dependencies>
-					<dependency>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>app-lifecycle-nexus</artifactId>
-						<version>${app-lifecycle.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
+				<groupId>org.sonatype.nexus</groupId>
+				<artifactId>nexus-plugin-bundle-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.modello</groupId>
 				<artifactId>modello-maven-plugin</artifactId>
-				<version>1.2</version>
 				<executions>
 					<execution>
 						<id>cas-config.xml</id>
