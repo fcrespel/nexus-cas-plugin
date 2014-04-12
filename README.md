@@ -68,3 +68,6 @@ Changelog
 **Version 1.2.0**
 * Compatibility with Nexus 2.7.x and higher.
 * Conversion of Plexus components to JSR-330.
+
+**Version 1.2.1**
+* Compatibility with Nexus 2.8.x and higher.
